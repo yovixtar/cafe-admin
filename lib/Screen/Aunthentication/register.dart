@@ -13,11 +13,13 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(242, 10, 9, 34),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Container(
             width: double.infinity,
-            // height: 700,
-            color: Color.fromARGB(242, 10, 9, 34),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -171,6 +173,10 @@ class _RegisterState extends State<Register> {
                   ),
                 )
               ],
-            )));
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

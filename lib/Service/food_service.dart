@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../Model/food_model.dart';
 
 class FoodService {
-  final _baseUrl = 'http://192.168.7.201:3000';
+  final _baseUrl = 'http://localhost:3000';
 
   Future<List<FoodModel>> getFoods() async {
     final response = await http.get(Uri.parse('$_baseUrl/api/makanan'));

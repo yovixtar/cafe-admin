@@ -13,11 +13,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(242, 10, 9, 34),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Container(
             width: double.infinity,
-            // height: 700,
-            color: Color.fromARGB(242, 10, 9, 34),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -105,37 +107,43 @@ class _LoginPageState extends State<LoginPage> {
                         height: 40,
                       ),
                       ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: primaryColor,
-                            minimumSize: const Size(double.infinity, 55),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const BottomBar()));
-                          },
-                          child: Text("Masuk",
-                              style: GoogleFonts.lato(
-                                textStyle: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.white,
-                                  shadows: [
-                                    Shadow(
-                                      offset:
-                                          Offset(1.0, 1.0), // Posisi bayangan
-                                      blurRadius: 2.0, // Jarak blur bayangan
-                                      color: Color.fromARGB(64, 0, 0,
-                                          0), // Warna bayangan lebih terang
-                                    ),
-                                  ],
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: primaryColor,
+                          minimumSize: const Size(double.infinity, 55),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const BottomBar()));
+                        },
+                        child: Text(
+                          "Masuk",
+                          style: GoogleFonts.lato(
+                            textStyle: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                  offset: Offset(1.0, 1.0), // Posisi bayangan
+                                  blurRadius: 2.0, // Jarak blur bayangan
+                                  color: Color.fromARGB(64, 0, 0,
+                                      0), // Warna bayangan lebih terang
                                 ),
-                              )))
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 )
               ],
-            )));
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
