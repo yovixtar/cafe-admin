@@ -4,19 +4,56 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:admin/color.dart';
 
-class AddMenuPage extends StatefulWidget {
+class FormMenuPage extends StatefulWidget {
+  final String? gambar;
+  final String? namaMenu;
+  final int? harga;
+  final String? kategori;
+  final String? deskripsi;
+
+  const FormMenuPage({
+    Key? key,
+    this.gambar,
+    this.namaMenu,
+    this.harga,
+    this.kategori,
+    this.deskripsi,
+  }) : super(key: key);
+
   @override
-  _AddMenuPageState createState() => _AddMenuPageState();
+  _FormMenuPageState createState() => _FormMenuPageState();
 }
 
-class _AddMenuPageState extends State<AddMenuPage> {
+class _FormMenuPageState extends State<FormMenuPage> {
   final _namaController = TextEditingController();
   final _hargaController = TextEditingController();
   final _deskripsiController = TextEditingController();
   int _hargaInput = 0;
   String? _kategori;
   String _imagePath = '';
-  final _categories = ['Kategori 1', 'Kategori 2', 'Kategori 3'];
+  final _categories = ['Ayam', 'Rendang', 'Tempe'];
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.namaMenu != null) {
+      _namaController.text = widget.namaMenu!;
+    }
+    if (widget.harga != null) {
+      _hargaController.text =
+          'Rp ${widget.harga!.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}';
+      _hargaInput = widget.harga!;
+    }
+    if (widget.deskripsi != null) {
+      _deskripsiController.text = widget.deskripsi!;
+    }
+    if (widget.kategori != null) {
+      _kategori = widget.kategori;
+    }
+    if (widget.gambar != null && widget.gambar!.isNotEmpty) {
+      _imagePath = widget.gambar!;
+    }
+  }
 
   Future<void> _pickImage(ImageSource source) async {
     final picker = ImagePicker();
@@ -79,7 +116,7 @@ class _AddMenuPageState extends State<AddMenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tambah Menu'),
+        title: Text(widget.namaMenu != null ? 'Edit Menu' : 'Tambah Menu'),
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Center(
@@ -129,14 +166,21 @@ class _AddMenuPageState extends State<AddMenuPage> {
                                 fit: BoxFit.cover,
                               ),
                             )
-                          : Image.file(
-                              File(_imagePath),
-                              fit: BoxFit.cover,
+                          : Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Image.asset(
+                                'images/img-icon.png',
+                                fit: BoxFit.cover,
+                              ),
                             ),
+                      // : Image.file(
+                      //     File(_imagePath),
+                      //     fit: BoxFit.cover,
+                      //   ),
                     ),
                     Positioned(
-                      bottom: -15, // Letak tombol di luar kotak
-                      right: -15, // Letak tombol di luar kotak
+                      bottom: -15,
+                      right: -15,
                       child: SizedBox(
                         width: 60,
                         height: 60,
@@ -237,9 +281,7 @@ class _AddMenuPageState extends State<AddMenuPage> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {
-                        // Handle submit logic
-                      },
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColor,
                         shape: RoundedRectangleBorder(
@@ -251,7 +293,9 @@ class _AddMenuPageState extends State<AddMenuPage> {
                           vertical: 15,
                         ),
                         child: Text(
-                          'Simpan',
+                          widget.namaMenu != null
+                              ? 'Simpan Perubahan'
+                              : 'Tambah Menu',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,

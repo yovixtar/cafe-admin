@@ -33,31 +33,25 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<List<Category>> _fetchCategories() async {
-    // Mengambil kategori dari API
     List<Category> apiCategories = await CategoryService().getCategories();
 
-    // Menambah kategori 'Semua' secara manual
     Category semuaCategory =
         Category(id: 'semua', nama: 'Semua', gambar: 'uploads/fire.jpg');
     return [semuaCategory, ...apiCategories];
   }
 
   Future<List<FoodModel>> _fetchFoods(String categoryId) async {
-    // Mengambil makanan berdasarkan kategori
     if (categoryId == 'semua' || categoryId.isEmpty) {
-      return await FoodService()
-          .getFoods(); // Mengambil semua makanan jika kategori kosong
+      return await FoodService().getFoods();
     } else {
-      return await FoodService()
-          .getByCategory(categoryId); // Mengambil makanan berdasarkan kategori
+      return await FoodService().getByCategory(categoryId);
     }
   }
 
   void _onCategorySelected(String categoryId) {
     setState(() {
       selectedCategoryId = categoryId;
-      fetchedFoods = _fetchFoods(
-          selectedCategoryId); // Memuat ulang makanan berdasarkan kategori yang dipilih
+      fetchedFoods = _fetchFoods(selectedCategoryId);
     });
   }
 
@@ -69,31 +63,13 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               height: 130,
-              color: primaryColor, // Ganti dengan warna yang sesuai
+              color: primaryColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Padding(
-                      //   padding: const EdgeInsets.only(left: 15),
-                      //   child: ElevatedButton(
-                      //     onPressed: () {
-                      //       Navigator.pop(context);
-                      //     },
-                      //     style: ElevatedButton.styleFrom(
-                      //       backgroundColor: Color.fromARGB(255, 230, 230, 230),
-                      //       shape: CircleBorder(),
-                      //       padding: EdgeInsets.all(10),
-                      //     ),
-                      //     child: Icon(
-                      //       Icons.arrow_back_ios,
-                      //       color: Colors.black,
-                      //       size: 20,
-                      //     ),
-                      //   ),
-                      // ),
                       Expanded(
                         child: SizedBox(),
                         flex: 1,
@@ -106,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                               color: const Color.fromARGB(255, 255, 255, 255),
                               fontSize: 18),
                         ),
-                        flex: 1,
+                        flex: 3,
                       ),
                       Expanded(
                         child: Column(

@@ -1,6 +1,5 @@
 import 'package:admin/Screen/Aunthentication/login.dart';
 import 'package:admin/Screen/Aunthentication/register.dart';
-import 'package:admin/Screen/menu/add_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:admin/Providers/add_to_cart_provider.dart';
@@ -14,12 +13,10 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) =>
-          OrderItemProvider(), // Mendaftarkan OrderItemProvider sebagai provider
+      create: (context) => OrderItemProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
@@ -64,8 +61,7 @@ class _FistScreenState extends State<FistScreen> {
             ),
             const SizedBox(height: 50),
             Container(
-                width: MediaQuery.of(context).size.width *
-                    0.6, // Lebar 80% dari lebar layar,
+                width: MediaQuery.of(context).size.width * 0.6,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
@@ -85,10 +81,9 @@ class _FistScreenState extends State<FistScreen> {
                             color: Colors.white,
                             shadows: [
                               Shadow(
-                                offset: Offset(1.0, 1.0), // Posisi bayangan
-                                blurRadius: 2.0, // Jarak blur bayangan
-                                color: Color.fromARGB(
-                                    64, 0, 0, 0), // Warna bayangan lebih terang
+                                offset: Offset(1.0, 1.0),
+                                blurRadius: 2.0,
+                                color: Color.fromARGB(64, 0, 0, 0),
                               ),
                             ],
                           ),

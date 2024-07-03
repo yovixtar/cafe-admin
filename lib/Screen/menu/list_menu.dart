@@ -1,4 +1,5 @@
-import 'package:admin/Screen/menu/add_menu.dart';
+import 'package:admin/Screen/menu/form_menu.dart';
+import 'package:admin/Screen/menu/detail_menu.dart';
 import 'package:flutter/material.dart';
 
 class ListMenu extends StatefulWidget {
@@ -11,24 +12,40 @@ class ListMenu extends StatefulWidget {
 class _ListMenuState extends State<ListMenu> {
   final List<Map<String, dynamic>> menuItems = [
     {
-      'image': 'images/img-icon.png',
-      'name': 'Menu Item 1',
-      'price': 10000,
+      'gambar': 'images/img-icon.png',
+      'namaMenu': 'Ayam Bakar',
+      'harga': 10000,
+      'kategori': 'Ayam',
+      'deskripsi':
+          'ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ',
+      'stok': 10,
     },
     {
-      'image': 'images/img-icon.png',
-      'name': 'Menu Item 2',
-      'price': 20000,
+      'gambar': 'images/img-icon.png',
+      'namaMenu': 'Ayam Goreng',
+      'harga': 10000,
+      'kategori': 'Ayam',
+      'deskripsi':
+          'ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ',
+      'stok': 10,
     },
     {
-      'image': 'images/img-icon.png',
-      'name': 'Menu Item 3',
-      'price': 15000,
+      'gambar': 'images/img-icon.png',
+      'namaMenu': 'Tempe Mendoan',
+      'harga': 5000,
+      'kategori': 'Tempe',
+      'deskripsi':
+          'ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ',
+      'stok': 10,
     },
     {
-      'image': 'images/img-icon.png',
-      'name': 'Menu Item 4',
-      'price': 25000,
+      'gambar': 'images/img-icon.png',
+      'namaMenu': 'Rendang Sapi',
+      'harga': 10000,
+      'kategori': 'Rendang',
+      'deskripsi':
+          'ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ini deskripsi panjang ',
+      'stok': 10,
     },
   ];
 
@@ -53,7 +70,7 @@ class _ListMenuState extends State<ListMenu> {
             crossAxisCount: 2,
             mainAxisSpacing: 15,
             crossAxisSpacing: 20,
-            childAspectRatio: 0.68,
+            childAspectRatio: 0.6,
           ),
           itemCount: menuItems.length,
           itemBuilder: (context, index) {
@@ -71,7 +88,7 @@ class _ListMenuState extends State<ListMenu> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: Image.asset(
-                        item['image'],
+                        item['gambar'],
                         height: 100,
                         width: double.infinity,
                         fit: BoxFit.cover,
@@ -79,7 +96,9 @@ class _ListMenuState extends State<ListMenu> {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      item['name'],
+                      item['namaMenu'],
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -87,7 +106,7 @@ class _ListMenuState extends State<ListMenu> {
                     ),
                     SizedBox(height: 2),
                     Text(
-                      'Rp. ${item['price'].toString().replaceAllMapped(
+                      'Rp. ${item['harga'].toString().replaceAllMapped(
                             RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
                             (Match m) => '${m[1]}.',
                           )}',
@@ -95,6 +114,8 @@ class _ListMenuState extends State<ListMenu> {
                         color: Colors.grey[700],
                         fontSize: 14,
                       ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                     SizedBox(
                       height: 14,
@@ -104,7 +125,19 @@ class _ListMenuState extends State<ListMenu> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              // Implement your action here
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MenuDetailPage(
+                                    gambar: item['gambar'],
+                                    namaMenu: item['namaMenu'],
+                                    harga: item['harga'],
+                                    kategori: item['kategori'],
+                                    deskripsi: item['deskripsi'],
+                                    stok: item['stok'],
+                                  ),
+                                ),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Color(0xFFFF7622),
@@ -131,7 +164,7 @@ class _ListMenuState extends State<ListMenu> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => AddMenuPage(),
+              builder: (context) => FormMenuPage(),
             ),
           );
         },
