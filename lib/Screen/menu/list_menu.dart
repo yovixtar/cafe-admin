@@ -1,3 +1,4 @@
+import 'package:admin/Screen/menu/add_menu.dart';
 import 'package:flutter/material.dart';
 
 class ListMenu extends StatefulWidget {
@@ -10,22 +11,22 @@ class ListMenu extends StatefulWidget {
 class _ListMenuState extends State<ListMenu> {
   final List<Map<String, dynamic>> menuItems = [
     {
-      'image': 'https://via.placeholder.com/150',
+      'image': 'images/img-icon.png',
       'name': 'Menu Item 1',
       'price': 10000,
     },
     {
-      'image': 'https://via.placeholder.com/150',
+      'image': 'images/img-icon.png',
       'name': 'Menu Item 2',
       'price': 20000,
     },
     {
-      'image': 'https://via.placeholder.com/150',
+      'image': 'images/img-icon.png',
       'name': 'Menu Item 3',
       'price': 15000,
     },
     {
-      'image': 'https://via.placeholder.com/150',
+      'image': 'images/img-icon.png',
       'name': 'Menu Item 4',
       'price': 25000,
     },
@@ -69,7 +70,7 @@ class _ListMenuState extends State<ListMenu> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: Image.network(
+                      child: Image.asset(
                         item['image'],
                         height: 100,
                         width: double.infinity,
@@ -112,7 +113,7 @@ class _ListMenuState extends State<ListMenu> {
                               ),
                             ),
                             child: Text(
-                              'Pesan',
+                              'Detail',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -128,7 +129,11 @@ class _ListMenuState extends State<ListMenu> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Implement your action here
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AddMenuPage(),
+            ),
+          );
         },
         backgroundColor: Color(0xFF2A4BA0),
         shape: RoundedRectangleBorder(

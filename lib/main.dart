@@ -1,5 +1,6 @@
 import 'package:admin/Screen/Aunthentication/login.dart';
 import 'package:admin/Screen/Aunthentication/register.dart';
+import 'package:admin/Screen/menu/add_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:admin/Providers/add_to_cart_provider.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Sen',
           useMaterial3: true,
         ),
-        home: const FistScreen(),
+        home: FistScreen(),
       ),
     );
   }
@@ -46,83 +47,84 @@ class _FistScreenState extends State<FistScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          body: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.zero,
-            margin: EdgeInsets.zero,
-            alignment: Alignment.topLeft,
-            child: Image.asset(
-              'images/Ellipse_1.png',
+        body: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.zero,
+              margin: EdgeInsets.zero,
+              alignment: Alignment.topLeft,
+              child: Image.asset(
+                'images/Ellipse_1.png',
+              ),
             ),
-          ),
-          Container(
-            child: Image.asset(
-              'images/Logo.png',
+            Container(
+              child: Image.asset(
+                'images/Logo.png',
+              ),
             ),
-          ),
-          const SizedBox(height: 50),
-          Container(
-              width: MediaQuery.of(context).size.width *
-                  0.6, // Lebar 80% dari lebar layar,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    minimumSize: const Size(double.infinity, 55),
-                  ),
+            const SizedBox(height: 50),
+            Container(
+                width: MediaQuery.of(context).size.width *
+                    0.6, // Lebar 80% dari lebar layar,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      minimumSize: const Size(double.infinity, 55),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()));
+                    },
+                    child: Text("MASUK",
+                        style: GoogleFonts.lato(
+                          textStyle: const TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(1.0, 1.0), // Posisi bayangan
+                                blurRadius: 2.0, // Jarak blur bayangan
+                                color: Color.fromARGB(
+                                    64, 0, 0, 0), // Warna bayangan lebih terang
+                              ),
+                            ],
+                          ),
+                        )))),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Belum Punya Akun?"),
+                TextButton(
                   onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LoginPage()));
+                            builder: (context) => const Register()));
                   },
-                  child: Text("MASUK",
-                      style: GoogleFonts.lato(
-                        textStyle: const TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white,
-                          shadows: [
-                            Shadow(
-                              offset: Offset(1.0, 1.0), // Posisi bayangan
-                              blurRadius: 2.0, // Jarak blur bayangan
-                              color: Color.fromARGB(
-                                  64, 0, 0, 0), // Warna bayangan lebih terang
-                            ),
-                          ],
-                        ),
-                      )))),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Belum Punya Akun?"),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Register()));
-                },
-                child: Text(
-                  "Register",
-                  style: TextStyle(color: primaryColor),
-                ),
-              )
-            ],
-          ),
-          Expanded(
-            child: Container(),
-          ),
-          Container(
-            padding: EdgeInsets.zero,
-            margin: EdgeInsets.zero,
-            alignment: Alignment.bottomRight,
-            child: Image.asset(
-              'images/Ellipse_2.png',
+                  child: Text(
+                    "Register",
+                    style: TextStyle(color: primaryColor),
+                  ),
+                )
+              ],
             ),
-          ),
-        ],
-      )),
+            Expanded(
+              child: Container(),
+            ),
+            Container(
+              padding: EdgeInsets.zero,
+              margin: EdgeInsets.zero,
+              alignment: Alignment.bottomRight,
+              child: Image.asset(
+                'images/Ellipse_2.png',
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
