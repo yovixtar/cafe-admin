@@ -1,4 +1,5 @@
 import 'package:admin/Screen/home/home_screen.dart';
+import 'package:admin/Screen/menu/list_menu.dart';
 import 'package:admin/color.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,9 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   int currentIndex = 0;
-  List<Widget> screens = const [
+  List<Widget> screens = [
     HomePage(),
-    Scaffold(),
+    ListMenu(),
     Scaffold(),
     Scaffold(),
     Scaffold(),

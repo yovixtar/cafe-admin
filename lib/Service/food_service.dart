@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'package:admin/config.dart';
 import 'package:http/http.dart' as http;
 import '../Model/food_model.dart';
 
 class FoodService {
-  final _baseUrl = 'https://b405-112-78-177-166.ngrok-free.app';
+  final _baseUrl = Config.baseUrl;
 
   Future<List<FoodModel>> getFoods() async {
     final response = await http.get(Uri.parse('$_baseUrl/api/makanan'));
