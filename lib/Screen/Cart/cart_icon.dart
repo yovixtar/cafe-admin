@@ -13,19 +13,21 @@ class CartIconWithBadge extends StatelessWidget {
           padding: const EdgeInsets.only(right: 15),
           child: Stack(
             children: [
-              Ink(
-                decoration: ShapeDecoration(
-                  color: const Color.fromARGB(255, 230, 230, 230),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
                   shape: CircleBorder(),
+                  padding: EdgeInsets.all(12),
+                  backgroundColor: const Color.fromARGB(255, 230, 230, 230),
                 ),
-                child: IconButton(
-                  icon: Icon(Icons.shopping_cart),
-                  iconSize: 20,
-                  onPressed: () {
-                    // Navigate to cart page
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CartCoba()));
-                  },
+                onPressed: () {
+                  // Navigate to cart page
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => CartCoba()));
+                },
+                child: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.black,
+                  size: 20,
                 ),
               ),
               if (totalItems > 0)

@@ -1,3 +1,4 @@
+import 'package:admin/config.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:admin/Screen/Detail/food_detail.dart';
@@ -61,7 +62,7 @@ class _FoodCardState extends State<FoodCard> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: Image.network(
-                  'http://192.168.7.201:3000/${widget.gambar}',
+                  '${Config.baseUrl}/${widget.gambar}',
                   height: 120,
                   width: 120,
                   fit: BoxFit.cover,

@@ -1,3 +1,4 @@
+import 'package:admin/config.dart';
 import 'package:flutter/material.dart';
 import 'package:admin/Model/category_model.dart';
 import 'package:admin/Model/food_model.dart';
@@ -64,57 +65,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // appBar: PreferredSize(
-        //   preferredSize: Size.fromHeight(150),
-        //   child: AppBar(
-        //     leading: Padding(
-        //       padding: EdgeInsets.only(left: 15),
-        //       child: Ink(
-        //         decoration: ShapeDecoration(
-        //           color: const Color.fromARGB(255, 230, 230, 230),
-        //           shape: CircleBorder(),
-        //         ),
-        //         child: IconButton(
-        //           onPressed: () {
-        //             Navigator.pop(context);
-        //           },
-        //           icon: const Icon(Icons.arrow_back_ios),
-        //           iconSize: 20,
-        //         ),
-        //       ),
-        //     ),
-        //     backgroundColor: primaryColor,
-        //     title: Center(
-        //       child: Column(
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         children: [
-        //           SizedBox(
-        //             height: 15,
-        //           ),
-        //           Text(
-        //             'Halo Admin!',
-        //             style: TextStyle(
-        //                 color: const Color.fromARGB(255, 255, 255, 255)),
-        //           ),
-        //           Text(
-        //             'Silahkan Pilih Menu',
-        //             textAlign: TextAlign.center,
-        //             style: TextStyle(
-        //                 color: const Color.fromARGB(255, 255, 255, 255),
-        //                 fontSize: 20),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //     actions: [
-        //       CartIconWithBadge(),
-        //     ],
-        //   ),
-        // ),
         body: Column(
           children: [
             Container(
-              height: 150,
+              height: 130,
               color: primaryColor, // Ganti dengan warna yang sesuai
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -122,34 +76,49 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: CircleBorder(),
-                            padding: EdgeInsets.all(10),
-                          ),
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.black, // Warna ikon
-                            size: 20,
-                          ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 15),
+                      //   child: ElevatedButton(
+                      //     onPressed: () {
+                      //       Navigator.pop(context);
+                      //     },
+                      //     style: ElevatedButton.styleFrom(
+                      //       backgroundColor: Color.fromARGB(255, 230, 230, 230),
+                      //       shape: CircleBorder(),
+                      //       padding: EdgeInsets.all(10),
+                      //     ),
+                      //     child: Icon(
+                      //       Icons.arrow_back_ios,
+                      //       color: Colors.black,
+                      //       size: 20,
+                      //     ),
+                      //   ),
+                      // ),
+                      Expanded(
+                        child: SizedBox(),
+                        flex: 1,
+                      ),
+                      Expanded(
+                        child: Text(
+                          'Halo Admin!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: const Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 18),
                         ),
+                        flex: 1,
                       ),
-                      Text(
-                        'Halo Admin!',
-                        style: TextStyle(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [CartIconWithBadge()],
+                        ),
+                        flex: 1,
                       ),
-                      CartIconWithBadge(),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 5),
                   Text(
                     'Silahkan Pilih Menu',
                     style: TextStyle(
@@ -229,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                                               backgroundColor: Color.fromARGB(
                                                   255, 207, 207, 207),
                                               backgroundImage: NetworkImage(
-                                                  'http://192.168.7.201:3000/${category.gambar}'),
+                                                  '${Config.baseUrl}/${category.gambar}'),
                                             ),
                                             SizedBox(width: 8),
                                             Text(

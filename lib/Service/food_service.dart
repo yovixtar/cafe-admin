@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../Model/food_model.dart';
 
 class FoodService {
-  final _baseUrl = 'http://localhost:3000';
+  final _baseUrl = 'https://b405-112-78-177-166.ngrok-free.app';
 
   Future<List<FoodModel>> getFoods() async {
     final response = await http.get(Uri.parse('$_baseUrl/api/makanan'));

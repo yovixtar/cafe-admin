@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:admin/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:admin/Model/order_model.dart';
 
 class OrderService {
-  static const String apiUrl =
-      'http://192.168.7.201:3000/api/order'; // Ganti dengan URL API order Anda
+  static const String apiUrl = '${Config.baseUrl}/api/order';
 
   static Future<bool> submitOrder(OrderModel order) async {
     var headers = {

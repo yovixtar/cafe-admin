@@ -1,3 +1,4 @@
+import 'package:admin/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:admin/Model/food_model.dart';
@@ -28,7 +29,7 @@ class _FoodDetailState extends State<FoodDetail> {
                 DetailAppBar(),
                 Center(
                   child: Image.network(
-                    'http://192.168.7.201:3000/${widget.data.gambar}',
+                    '${Config.baseUrl}/${widget.data.gambar}',
                     height: 200,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
