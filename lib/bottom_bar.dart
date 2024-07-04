@@ -1,7 +1,8 @@
 import 'package:admin/Screen/home/home_screen.dart';
 import 'package:admin/Screen/menu/list_menu.dart';
+import 'package:admin/Screen/profile/profile.dart';
 import 'package:admin/color.dart';
-import 'package:admin/kategori/list_kategori.dart';
+import 'package:admin/Screen/kategori/list_kategori.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {
@@ -20,7 +21,7 @@ class _BottomBarState extends State<BottomBar> {
     ListMenu(),
     ListKategori(),
     Scaffold(),
-    Scaffold(),
+    ProfilePage(),
   ];
 
   @override

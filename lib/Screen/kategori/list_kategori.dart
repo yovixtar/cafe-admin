@@ -1,5 +1,5 @@
 import 'package:admin/color.dart';
-import 'package:admin/kategori/form_kategori.dart';
+import 'package:admin/Screen/kategori/form_kategori.dart';
 import 'package:flutter/material.dart';
 
 class ListKategori extends StatefulWidget {

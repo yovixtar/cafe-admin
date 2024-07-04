@@ -161,9 +161,8 @@ class _FormKategoriPageState extends State<FormKategoriPage> {
                             onPressed: () =>
                                 _showImageSourceActionSheet(context),
                             child: Icon(
-                              Icons.edit,
+                              Icons.camera_alt,
                               color: Colors.white,
-                              size: 30,
                             ),
                           ),
                         ),

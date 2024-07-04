@@ -195,9 +195,8 @@ class _FormMenuPageState extends State<FormMenuPage> {
                             onPressed: () =>
                                 _showImageSourceActionSheet(context),
                             child: Icon(
-                              Icons.edit,
+                              Icons.camera_alt,
                               color: Colors.white,
-                              size: 30,
                             ),
                           ),
                         ),
