@@ -70,7 +70,7 @@ class _ListMenuState extends State<ListMenu> {
             crossAxisCount: 2,
             mainAxisSpacing: 15,
             crossAxisSpacing: 20,
-            childAspectRatio: 0.6,
+            childAspectRatio: 0.65,
           ),
           itemCount: menuItems.length,
           itemBuilder: (context, index) {
