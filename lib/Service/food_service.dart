@@ -9,10 +9,6 @@ class FoodService {
   Future<List<FoodModel>> getFoods() async {
     final response = await http.get(Uri.parse('$_baseUrl/api/makanan'));
     if (response.statusCode == 200) {
-      // Iterable body = json.decode(response.body);
-      // List<FoodModel> foods =
-      //     body.map((item) => FoodModel.fromJson(item)).toList();
-      // return foods;
       final List body = json.decode(response.body);
       return body.map((e) => FoodModel.fromJson(e)).toList();
     } else {
@@ -24,10 +20,6 @@ class FoodService {
     final response =
         await http.get(Uri.parse('$_baseUrl/api/makanan/kategori/$id'));
     if (response.statusCode == 200) {
-      // Iterable body = json.decode(response.body);
-      // List<FoodModel> foods =
-      //     body.map((item) => FoodModel.fromJson(item)).toList();
-      // return foods;
       final List body = json.decode(response.body);
       return body.map((e) => FoodModel.fromJson(e)).toList();
     } else {
@@ -38,12 +30,8 @@ class FoodService {
   Future<FoodModel> getById(String id) async {
     final response = await http.get(Uri.parse('$_baseUrl/api/makanan/$id'));
     if (response.statusCode == 200) {
-      // Iterable body = json.decode(response.body);
-      // List<FoodModel> foods =
-      //     body.map((item) => FoodModel.fromJson(item)).toList();
-      // return foods;
       final Map<String, dynamic> body = json.decode(response.body);
-      return FoodModel.fromJson(body); // Mengembalikan objek FoodModel tunggal
+      return FoodModel.fromJson(body);
     } else {
       throw Exception('Failed to load makanan');
     }

@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     List<Category> apiCategories = await CategoryService().getCategories();
 
     Category semuaCategory =
-        Category(id: 'semua', nama: 'Semua', gambar: 'uploads/fire.jpg');
+        Category(id: 'semua', nama: 'Semua', gambar: '/uploads/fire.jpg');
     return [semuaCategory, ...apiCategories];
   }
 
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                                               backgroundColor: Color.fromARGB(
                                                   255, 207, 207, 207),
                                               backgroundImage: NetworkImage(
-                                                  '${Config.baseUrl}/${category.gambar}'),
+                                                  '${Config.baseUrl}${category.gambar}'),
                                             ),
                                             SizedBox(width: 8),
                                             Text(

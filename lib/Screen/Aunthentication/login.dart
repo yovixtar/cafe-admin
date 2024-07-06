@@ -1,4 +1,4 @@
-import 'package:admin/Service/apis/api_user.dart';
+import 'package:admin/Service/user_service.dart';
 import 'package:admin/Service/session.dart';
 import 'package:admin/bottom_bar.dart';
 import 'package:admin/color.dart';
@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       isLoading = true;
     });
-    final result = await APIUserService().login(
+    final result = await UserService().login(
         username: _usernameController.text, password: _passwordController.text);
     if (result.containsKey('success')) {
       if (await SessionManager.hasToken()) {

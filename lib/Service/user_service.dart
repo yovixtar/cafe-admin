@@ -4,14 +4,14 @@ import 'package:admin/Service/session.dart';
 import 'package:admin/config.dart';
 import 'package:http/http.dart' as http;
 
-class APIUserService {
+class UserService {
   String baseUrl = Config.baseUrl;
 
   Future<Map<String, dynamic>> login({
     String? username,
     String? password,
   }) async {
-    var url = Uri.parse("$baseUrl/auth/login");
+    var url = Uri.parse("$baseUrl/api/auth/login");
     var headers = {"Content-Type": "application/json"};
 
     var body = jsonEncode({
@@ -36,7 +36,7 @@ class APIUserService {
     String? noHp,
     String? password,
   }) async {
-    var url = Uri.parse("$baseUrl/auth/registrasi");
+    var url = Uri.parse("$baseUrl/api/auth/registrasi");
     var headers = {"Content-Type": "application/json"};
 
     var body = jsonEncode({

@@ -1,4 +1,3 @@
 class Config {
-  static const String baseUrl =
-      "https://c920-112-78-177-184.ngrok-free.app/api";
+  static const String baseUrl = "https://f772-112-78-177-184.ngrok-free.app";
 }

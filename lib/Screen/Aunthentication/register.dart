@@ -1,5 +1,5 @@
 import 'package:admin/Screen/Aunthentication/login.dart';
-import 'package:admin/Service/apis/api_user.dart';
+import 'package:admin/Service/user_service.dart';
 import 'package:admin/color.dart';
 import 'package:admin/snackbar_utils.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class _RegisterState extends State<Register> {
     setState(() {
       isLoading = true;
     });
-    final result = await APIUserService().signup(
+    final result = await UserService().signup(
       username: _usernameController.text,
       password: _passwordController.text,
       noHp: _phoneNumberController.text,

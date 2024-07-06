@@ -1,13 +1,19 @@
+import 'dart:io';
+import 'package:admin/bottom_bar.dart';
+import 'package:admin/config.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:admin/color.dart';
+import 'package:admin/Service/category_service.dart';
 
 class FormKategoriPage extends StatefulWidget {
+  final String? id;
   final String? gambar;
   final String? namaKategori;
 
   const FormKategoriPage({
     Key? key,
+    this.id,
     this.gambar,
     this.namaKategori,
   }) : super(key: key);
@@ -19,6 +25,8 @@ class FormKategoriPage extends StatefulWidget {
 class _FormKategoriPageState extends State<FormKategoriPage> {
   final _namaController = TextEditingController();
   String _imagePath = '';
+  bool _isLoading = false;
+  bool _isFromNetwork = false;
 
   @override
   void initState() {
@@ -28,6 +36,7 @@ class _FormKategoriPageState extends State<FormKategoriPage> {
     }
     if (widget.gambar != null && widget.gambar!.isNotEmpty) {
       _imagePath = widget.gambar!;
+      _isFromNetwork = true;
     }
   }
 
@@ -37,6 +46,7 @@ class _FormKategoriPageState extends State<FormKategoriPage> {
     if (pickedFile != null) {
       setState(() {
         _imagePath = pickedFile.path;
+        _isFromNetwork = false;
       });
     }
   }
@@ -75,6 +85,80 @@ class _FormKategoriPageState extends State<FormKategoriPage> {
         );
       },
     );
+  }
+
+  Future<void> _saveCategory() async {
+    if (_namaController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Nama kategori harus diisi')),
+      );
+      return;
+    }
+
+    if (widget.id == null && _imagePath.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Gambar harus diunggah untuk kategori baru')),
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      var response;
+      if (_imagePath.isNotEmpty && _imagePath != widget.gambar) {
+        response = widget.id != null
+            ? await CategoryService().updateCategory(
+                id: widget.id!,
+                nama: _namaController.text,
+                gambar: _imagePath,
+              )
+            : await CategoryService().addCategory(
+                nama: _namaController.text,
+                gambar: _imagePath,
+              );
+      } else {
+        response = widget.id != null
+            ? await CategoryService().updateCategory(
+                id: widget.id!,
+                nama: _namaController.text,
+              )
+            : await CategoryService().addCategory(
+                nama: _namaController.text,
+                gambar: _imagePath,
+              );
+      }
+
+      setState(() {
+        _isLoading = false;
+      });
+
+      if (response.containsKey('success')) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['success'])),
+        );
+        Navigator.pop(context);
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+              builder: (_) => BottomBar(
+                    toPage: 2,
+                  )),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['error'])),
+        );
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Terjadi kesalahan, coba lagi nanti')),
+      );
+    }
   }
 
   @override
@@ -132,17 +216,15 @@ class _FormKategoriPageState extends State<FormKategoriPage> {
                                 fit: BoxFit.cover,
                               ),
                             )
-                          : Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Image.asset(
-                                'images/img-icon.png',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                      // : Image.file(
-                      //     File(_imagePath),
-                      //     fit: BoxFit.cover,
-                      //   ),
+                          : _isFromNetwork
+                              ? Image.network(
+                                  "${Config.baseUrl}$_imagePath",
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.file(
+                                  File(_imagePath),
+                                  fit: BoxFit.cover,
+                                ),
                     ),
                     Positioned(
                       bottom: -15,
@@ -190,7 +272,7 @@ class _FormKategoriPageState extends State<FormKategoriPage> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _isLoading ? null : _saveCategory,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColor,
                         shape: RoundedRectangleBorder(
@@ -214,7 +296,11 @@ class _FormKategoriPageState extends State<FormKategoriPage> {
                     ),
                   ),
                 ],
-              )
+              ),
+              if (_isLoading) ...[
+                SizedBox(height: 24),
+                Center(child: CircularProgressIndicator()),
+              ],
             ],
           ),
         ),
