@@ -1,3 +1,5 @@
+import 'package:admin/Screen/Aunthentication/login.dart';
+import 'package:admin/Service/session.dart';
 import 'package:admin/color.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,15 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  void _logout() async {
+    await SessionManager.clearToken();
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => LoginPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
-                  // Handle logout
+                  _logout();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryColor,
