@@ -1,5 +1,7 @@
 import 'package:admin/Model/order_model.dart';
+import 'package:admin/bottom_bar.dart';
 import 'package:admin/color.dart';
+import 'package:admin/snackbar_utils.dart';
 import 'package:flutter/material.dart';
 
 class NotaOrderPage extends StatefulWidget {
@@ -136,7 +138,18 @@ class _NotaOrderPageState extends State<NotaOrderPage> {
                 ),
                 Spacer(),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    SnackbarUtils.showSuccessSnackbar(
+                        context, "Terimakasih telah berbelanja !");
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => BottomBar(
+                          toPage: 3,
+                        ),
+                      ),
+                    );
+                  },
                   icon: Icon(
                     Icons.print,
                     color: Colors.white,
