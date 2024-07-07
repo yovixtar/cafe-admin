@@ -1,5 +1,8 @@
 import 'package:admin/Screen/menu/form_menu.dart';
+import 'package:admin/Service/food_service.dart';
+import 'package:admin/bottom_bar.dart';
 import 'package:admin/config.dart';
+import 'package:admin/snackbar_utils.dart';
 import 'package:flutter/material.dart';
 
 class MenuDetailPage extends StatefulWidget {
@@ -218,8 +221,23 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                                     ),
                                   ),
                                   TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
+                                    onPressed: () async {
+                                      final response = await FoodService()
+                                          .deleteMenu(widget.idMenu);
+                                      if (response.containsKey('success')) {
+                                        SnackbarUtils.showSuccessSnackbar(
+                                            context, response['success']);
+                                        Navigator.pop(context);
+                                        Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (_) => BottomBar(
+                                                    toPage: 1,
+                                                  )),
+                                        );
+                                      } else {
+                                        SnackbarUtils.showErrorSnackbar(
+                                            context, response['error']);
+                                      }
                                     },
                                     child: Text(
                                       'Hapus',

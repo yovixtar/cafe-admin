@@ -158,4 +158,24 @@ class FoodService {
       }
     }
   }
+
+  Future<Map<String, dynamic>> deleteMenu(String id) async {
+    var token = await SessionManager.getReqToken();
+    var url = Uri.parse('$_baseUrl/api/makanan/hapus/$id');
+
+    try {
+      final response = await http.delete(url, headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token!
+      });
+
+      if (response.statusCode == 200) {
+        return {'success': json.decode(response.body)['message']};
+      } else {
+        return {'error': 'Terjadi kendala, mohon tunggu sebentar lagi !'};
+      }
+    } catch (e) {
+      return {'error': 'Terjadi kendala, mohon tunggu sebentar lagi !'};
+    }
+  }
 }
