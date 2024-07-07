@@ -27,26 +27,19 @@ class _FoodDetailState extends State<FoodDetail> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DetailAppBar(),
-                Center(
-                  child: Image.network(
-                    '${Config.baseUrl}/${widget.data.gambar}',
-                    height: 200,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Image.asset(
-                        'images/Logo.png',
-                        height: 120,
-                        fit: BoxFit.cover,
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(height: 25),
                 Container(
-                  color: Color.fromARGB(255, 139, 139, 139),
+                  height: MediaQuery.of(context).size.height * 0.4,
                   width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                  height: 1,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: widget.data.gambar.isEmpty
+                          ? AssetImage('images/img-icon.png') as ImageProvider
+                          : NetworkImage(
+                                  "${Config.baseUrl}${widget.data.gambar}")
+                              as ImageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(30, 15, 0, 5),
@@ -62,7 +55,10 @@ class _FoodDetailState extends State<FoodDetail> {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'Rp. ${widget.data.harga}',
+                        'Rp. ${widget.data.harga.toString().replaceAllMapped(
+                              RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                              (Match m) => '${m[1]}.',
+                            )}',
                         style: TextStyle(
                           fontSize: 27,
                           fontWeight: FontWeight.bold,
@@ -87,6 +83,10 @@ class _FoodDetailState extends State<FoodDetail> {
                                 label: Text(kategori.nama.trim()),
                                 backgroundColor:
                                     Color.fromARGB(255, 255, 255, 255),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: BorderSide(color: Colors.grey),
+                                ),
                               );
                             }).toList(),
                           ),

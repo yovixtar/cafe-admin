@@ -61,8 +61,8 @@ class _FoodCardState extends State<FoodCard> {
                   width: 120,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
-                    return Image.asset(
-                      'images/Logo.png',
+                    return Image.network(
+                      '${Config.baseUrl}${widget.gambar}',
                       height: 120,
                       fit: BoxFit.cover,
                     );
@@ -84,38 +84,47 @@ class _FoodCardState extends State<FoodCard> {
                       fontWeight: FontWeight.w600,
                       color: Color.fromARGB(255, 0, 0, 0),
                     ))),
-                Text(widget.harga,
-                    style: GoogleFonts.lato(
-                        textStyle: const TextStyle(
+                Text(
+                  'Rp. ${widget.harga.toString().replaceAllMapped(
+                        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                        (Match m) => '${m[1]}.',
+                      )}',
+                  style: GoogleFonts.lato(
+                    textStyle: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                       color: Color.fromARGB(255, 0, 0, 0),
-                    ))),
-                Center(
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryColor,
-                      ),
-                      onPressed: _showFoodDetail,
-                      child: Text("Detail",
-                          style: GoogleFonts.lato(
-                            textStyle: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white,
-                              shadows: [
-                                Shadow(
-                                  offset: Offset(1.0, 1.0),
-                                  blurRadius: 2.0,
-                                  color: Color.fromARGB(64, 0, 0, 0),
-                                ),
-                              ],
-                            ),
-                          ))),
-                )
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
+          Center(
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor,
+              ),
+              onPressed: _showFoodDetail,
+              child: Text(
+                "Detail",
+                style: GoogleFonts.lato(
+                  textStyle: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 2.0,
+                        color: Color.fromARGB(64, 0, 0, 0),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
