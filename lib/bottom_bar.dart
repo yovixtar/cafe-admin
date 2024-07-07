@@ -53,7 +53,7 @@ class _BottomBarState extends State<BottomBar> {
               children: [
                 _buildNavItem(Icons.home, "Home", 0),
                 _buildNavItem(Icons.food_bank_outlined, "Food", 1),
-                _buildNavItem(Icons.grid_view_outlined, "Grid", 2),
+                _buildNavItem(Icons.grid_view_outlined, "Category", 2),
                 _buildNavItem(Icons.shopping_bag_outlined, "Shop", 3),
                 _buildNavItem(Icons.person, "Profile", 4),
               ],

@@ -127,7 +127,6 @@ class CategoryService {
       if (responseUpdateCategory.statusCode == 200) {
         return {'success': "Berhasil memperbarui kategori"};
       } else {
-        print(responseUpdateCategory.body);
         return {'error': "Terjadi kendala, mohon tunggu sebentar lagi !"};
       }
     }

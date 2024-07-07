@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:admin/bottom_bar.dart';
 import 'package:admin/config.dart';
+import 'package:admin/snackbar_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:admin/color.dart';
@@ -89,16 +90,13 @@ class _FormKategoriPageState extends State<FormKategoriPage> {
 
   Future<void> _saveCategory() async {
     if (_namaController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Nama kategori harus diisi')),
-      );
+      SnackbarUtils.showErrorSnackbar(context, 'Nama kategori harus diisi');
       return;
     }
 
     if (widget.id == null && _imagePath.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Gambar harus diunggah untuk kategori baru')),
-      );
+      SnackbarUtils.showErrorSnackbar(
+          context, 'Gambar harus diunggah untuk kategori baru');
       return;
     }
 
@@ -136,9 +134,7 @@ class _FormKategoriPageState extends State<FormKategoriPage> {
       });
 
       if (response.containsKey('success')) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response['success'])),
-        );
+        SnackbarUtils.showSuccessSnackbar(context, response['success']);
         Navigator.pop(context);
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
@@ -147,17 +143,14 @@ class _FormKategoriPageState extends State<FormKategoriPage> {
                   )),
         );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response['error'])),
-        );
+        SnackbarUtils.showErrorSnackbar(context, response['error']);
       }
     } catch (e) {
       setState(() {
         _isLoading = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Terjadi kesalahan, coba lagi nanti')),
-      );
+      SnackbarUtils.showErrorSnackbar(
+          context, 'Terjadi kesalahan, coba lagi nanti');
     }
   }
 
@@ -283,24 +276,22 @@ class _FormKategoriPageState extends State<FormKategoriPage> {
                         padding: EdgeInsets.symmetric(
                           vertical: 15,
                         ),
-                        child: Text(
-                          widget.namaKategori != null
-                              ? 'Simpan Perubahan'
-                              : 'Tambah Kategori',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
+                        child: (_isLoading)
+                            ? Center(child: CircularProgressIndicator())
+                            : Text(
+                                widget.namaKategori != null
+                                    ? 'Simpan Perubahan'
+                                    : 'Tambah Kategori',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
                       ),
                     ),
                   ),
                 ],
               ),
-              if (_isLoading) ...[
-                SizedBox(height: 24),
-                Center(child: CircularProgressIndicator()),
-              ],
             ],
           ),
         ),

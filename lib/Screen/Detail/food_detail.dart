@@ -6,7 +6,7 @@ import 'package:admin/Screen/Detail/add_to_cart.dart';
 import 'package:admin/Screen/Detail/detail_app_bar.dart';
 
 class FoodDetail extends StatefulWidget {
-  final FoodModel data; // Data yang diterima dari FoodService
+  final FoodModel data;
 
   const FoodDetail({super.key, required this.data});
 
@@ -34,7 +34,7 @@ class _FoodDetailState extends State<FoodDetail> {
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       return Image.asset(
-                        'images/logo.png',
+                        'images/Logo.png',
                         height: 120,
                         fit: BoxFit.cover,
                       );
@@ -80,15 +80,11 @@ class _FoodDetailState extends State<FoodDetail> {
                             ),
                           ),
                           Wrap(
-                            spacing: 8.0, // Spasi antara chip
+                            spacing: 8.0,
                             children:
                                 widget.data.kategori.map<Widget>((kategori) {
-                              final nama = kategori
-                                  .split(',')[1]
-                                  .split(':')[1]
-                                  .split('}')[0];
                               return Chip(
-                                label: Text(nama.trim()),
+                                label: Text(kategori.nama.trim()),
                                 backgroundColor:
                                     Color.fromARGB(255, 255, 255, 255),
                               );
@@ -110,8 +106,7 @@ class _FoodDetailState extends State<FoodDetail> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.start, // Tambahkan properti ini
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Center(
                         child: Text(

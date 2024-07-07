@@ -1,22 +1,27 @@
 import 'package:admin/Screen/menu/form_menu.dart';
+import 'package:admin/config.dart';
 import 'package:flutter/material.dart';
 
 class MenuDetailPage extends StatefulWidget {
+  final String idMenu;
   final String gambar;
   final String namaMenu;
   final int harga;
   final String kategori;
+  final String idKategori;
   final String deskripsi;
-  final int stok;
+  final String jumlah;
 
   const MenuDetailPage({
     Key? key,
+    required this.idMenu,
     required this.gambar,
     required this.namaMenu,
     required this.harga,
     required this.kategori,
+    required this.idKategori,
     required this.deskripsi,
-    required this.stok,
+    required this.jumlah,
   }) : super(key: key);
 
   @override
@@ -59,8 +64,8 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                 image: DecorationImage(
                   image: widget.gambar.isEmpty
                       ? AssetImage('images/img-icon.png') as ImageProvider
-                      : AssetImage('images/img-icon.png') as ImageProvider,
-                  // : NetworkImage(widget.gambar),
+                      : NetworkImage("${Config.baseUrl}${widget.gambar}")
+                          as ImageProvider,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -112,7 +117,7 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    "Stok : ${widget.stok}",
+                    "Stok : ${widget.jumlah}",
                     style: TextStyle(
                       fontSize: 14,
                     ),
@@ -164,11 +169,14 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => FormMenuPage(
+                                idMenu: widget.idMenu,
                                 gambar: widget.gambar,
                                 namaMenu: widget.namaMenu,
                                 harga: widget.harga,
                                 kategori: widget.kategori,
+                                idKategori: widget.idKategori,
                                 deskripsi: widget.deskripsi,
+                                jumlah: widget.jumlah,
                               ),
                             ),
                           );

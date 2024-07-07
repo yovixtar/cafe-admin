@@ -4,6 +4,7 @@ import 'package:admin/color.dart';
 import 'package:admin/Screen/kategori/form_kategori.dart';
 import 'package:admin/Service/category_service.dart';
 import 'package:admin/config.dart';
+import 'package:admin/snackbar_utils.dart';
 import 'package:flutter/material.dart';
 
 class ListKategori extends StatefulWidget {
@@ -34,9 +35,8 @@ class _ListKategoriState extends State<ListKategori> {
       setState(() {
         isLoading = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to load categories')),
-      );
+      SnackbarUtils.showErrorSnackbar(
+          context, 'Terjadi kesalahan, coba lagi nanti');
     }
   }
 
@@ -158,19 +158,16 @@ class _ListKategoriState extends State<ListKategori> {
                                             ),
                                             TextButton(
                                               onPressed: () async {
-                                                // Panggil fungsi deleteCategory
                                                 final response =
                                                     await CategoryService()
                                                         .deleteCategory(
                                                             kategori.id);
                                                 if (response
                                                     .containsKey('success')) {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                        content: Text(response[
-                                                            'success'])),
-                                                  );
+                                                  SnackbarUtils
+                                                      .showSuccessSnackbar(
+                                                          context,
+                                                          response['success']);
                                                   Navigator.pop(context);
                                                   Navigator.of(context)
                                                       .pushReplacement(
@@ -181,12 +178,10 @@ class _ListKategoriState extends State<ListKategori> {
                                                             )),
                                                   );
                                                 } else {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                        content: Text(
-                                                            response['error'])),
-                                                  );
+                                                  SnackbarUtils
+                                                      .showErrorSnackbar(
+                                                          context,
+                                                          response['error']);
                                                 }
                                               },
                                               child: Text('Hapus',

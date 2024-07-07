@@ -1,6 +1,7 @@
 import 'package:admin/Screen/Aunthentication/login.dart';
 import 'package:admin/Service/session.dart';
 import 'package:admin/color.dart';
+import 'package:admin/main.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _ProfilePageState extends State<ProfilePage> {
     await SessionManager.clearToken();
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => LoginPage(),
+        builder: (context) => FirstScreen(),
       ),
     );
   }

@@ -4,9 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:admin/Screen/Detail/food_detail.dart';
 import 'package:admin/Service/food_service.dart';
 import 'package:admin/color.dart';
-// import 'package:user/Model/food_model.dart';
-// import 'package:user/Service/food_service.dart';
-// import 'package:user/color.dart';
 
 class FoodCard extends StatefulWidget {
   final String gambar;
@@ -27,10 +24,8 @@ class FoodCard extends StatefulWidget {
 
 class _FoodCardState extends State<FoodCard> {
   void _showFoodDetail() async {
-    // Mengambil data makanan berdasarkan ID
     var foodData = await FoodService().getById(widget.id);
 
-    // Navigasi ke halaman DetailFood dengan membawa data yang didapat
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -43,7 +38,6 @@ class _FoodCardState extends State<FoodCard> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      // height: 10000,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Color.fromARGB(255, 225, 225, 225),
@@ -68,7 +62,7 @@ class _FoodCardState extends State<FoodCard> {
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Image.asset(
-                      'images/logo.png',
+                      'images/Logo.png',
                       height: 120,
                       fit: BoxFit.cover,
                     );
@@ -111,10 +105,9 @@ class _FoodCardState extends State<FoodCard> {
                               color: Colors.white,
                               shadows: [
                                 Shadow(
-                                  offset: Offset(1.0, 1.0), // Posisi bayangan
-                                  blurRadius: 2.0, // Jarak blur bayangan
-                                  color: Color.fromARGB(64, 0, 0,
-                                      0), // Warna bayangan lebih terang
+                                  offset: Offset(1.0, 1.0),
+                                  blurRadius: 2.0,
+                                  color: Color.fromARGB(64, 0, 0, 0),
                                 ),
                               ],
                             ),

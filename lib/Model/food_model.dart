@@ -1,3 +1,5 @@
+import 'package:admin/Model/category_model.dart';
+
 class FoodModel {
   final String id;
   final String nama;
@@ -5,7 +7,7 @@ class FoodModel {
   final String gambar;
   final String deskripsi;
   final int jumlah;
-  final List<String> kategori;
+  final List<Category> kategori;
 
   FoodModel({
     required this.id,
@@ -26,8 +28,10 @@ class FoodModel {
       gambar: json['gambar'] as String? ?? '',
       deskripsi: json['deskripsi'] as String? ?? '',
       jumlah: json['jumlah'] as int? ?? 0,
-      kategori: List<String>.from(
-          json['kategori']?.map((item) => item.toString()) ?? []),
+      kategori: (json['kategori'] as List<dynamic>?)
+              ?.map((item) => Category.fromJson(item))
+              .toList() ??
+          [],
     );
   }
 }

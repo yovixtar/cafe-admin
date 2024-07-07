@@ -134,8 +134,6 @@ class _HomePageState extends State<HomePage> {
                                         _onCategorySelected(category.id);
                                       },
                                       child: Container(
-                                        // padding: EdgeInsets.symmetric(
-                                        //     horizontal: 12, vertical: 8),
                                         padding: EdgeInsets.only(right: 12),
                                         margin: EdgeInsets.symmetric(
                                             horizontal: 4, vertical: 1),
@@ -162,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                                               offset: Offset(
                                                 0,
                                                 3,
-                                              ), // changes position of shadow
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -212,8 +210,7 @@ class _HomePageState extends State<HomePage> {
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 20,
                                 mainAxisSpacing: 20,
-                                childAspectRatio:
-                                    0.60, // Default aspect ratio (width:height = 1:1)
+                                childAspectRatio: 0.60,
                               ),
                               itemCount: foods.length,
                               itemBuilder: (context, index) {
