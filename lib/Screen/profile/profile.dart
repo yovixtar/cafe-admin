@@ -42,6 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _logout() async {
     await SessionManager.clearToken();
+    SnackbarUtils.showSuccessSnackbar(context, "Sampai Jumpa kembali !");
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => FirstScreen(),

@@ -1,3 +1,4 @@
+import 'package:admin/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:admin/Model/order_model.dart';
@@ -39,6 +40,19 @@ class _CartCobaState extends State<CartCoba> {
       bottomSheet: CheckOutBox(),
       appBar: AppBar(
         title: Text('Keranjang'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => BottomBar(
+                  toPage: 0,
+                ),
+              ),
+            );
+          },
+        ),
       ),
       body: Consumer<OrderItemProvider>(
         builder: (context, orderItemProvider, _) {
