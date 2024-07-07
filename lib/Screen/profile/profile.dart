@@ -1,4 +1,3 @@
-import 'package:admin/Screen/Aunthentication/login.dart';
 import 'package:admin/Service/session.dart';
 import 'package:admin/Service/user_service.dart';
 import 'package:admin/color.dart';
@@ -47,6 +46,50 @@ class _ProfilePageState extends State<ProfilePage> {
       MaterialPageRoute(
         builder: (context) => FirstScreen(),
       ),
+    );
+  }
+
+  void _showLogoutConfirmation() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Konfirmasi'),
+              IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+          content: Text('Apakah Anda yakin ingin logout?'),
+          actions: [
+            TextButton(
+              child: Text('Tidak'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor,
+              ),
+              child: Text(
+                'Ya, Logout',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _logout();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -114,20 +157,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     SizedBox(height: 30),
                     Divider(thickness: 1.5),
-                    // SizedBox(height: 20),
-                    // ListTile(
-                    //   leading: Icon(Icons.account_circle, color: Colors.blueAccent),
-                    //   title: Text('Account Settings'),
-                    //   trailing: Icon(Icons.arrow_forward_ios),
-                    //   onTap: () {
-                    //     // Navigate to account settings
-                    //   },
-                    // ),
-                    // Divider(thickness: 1.5),
                     SizedBox(height: 30),
                     ElevatedButton(
                       onPressed: () {
-                        _logout();
+                        _showLogoutConfirmation();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColor,
