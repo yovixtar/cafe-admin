@@ -5,7 +5,6 @@ class OrderItem {
 
   OrderItem({required this.nama, required this.harga, required this.quantity});
 
-  // Konversi instance OrderItem menjadi format JSON
   Map<String, dynamic> toJson() {
     return {
       'nama': nama,
@@ -14,43 +13,49 @@ class OrderItem {
     };
   }
 
-  // Factory constructor untuk membuat instance dari JSON
   factory OrderItem.fromJson(Map<String, dynamic> json) {
     return OrderItem(
         nama: json['nama'] as String? ?? '',
         harga: json['harga'] as int? ?? 0,
-        quantity: json['items'] as int? ?? 0);
+        quantity: json['quantity'] as int? ?? 0);
   }
 }
 
 class OrderModel {
+  final String? idOrder;
   final String namaPemesan;
   final String noMeja;
+  final int? totalHarga;
   List<OrderItem> items;
 
-  OrderModel(
-      {required this.namaPemesan, required this.noMeja, required this.items});
+  OrderModel({
+    this.idOrder,
+    required this.namaPemesan,
+    required this.noMeja,
+    this.totalHarga,
+    required this.items,
+  });
 
-  // Konversi instance OrderModel menjadi format JSON
   Map<String, dynamic> toJson() {
     return {
+      '_id': idOrder,
       'namaPemesan': namaPemesan,
       'noMeja': noMeja,
+      'totalHarga': totalHarga,
       'items': items.map((item) => item.toJson()).toList(),
     };
   }
 
-  // Factory constructor untuk membuat instance dari JSON
   factory OrderModel.fromJson(Map<String, dynamic> json) {
-    // Mendapatkan list item dari JSON
     List<dynamic> itemsJson = json['items'];
 
-    // Mapping itemsJson menjadi List<OrderItem>
     List<OrderItem> items =
         itemsJson.map((itemJson) => OrderItem.fromJson(itemJson)).toList();
     return OrderModel(
+        idOrder: json['_id'] as String? ?? '',
         namaPemesan: json['namaPemesan'] as String? ?? '',
-        noMeja: json['harga'] as String? ?? '',
+        noMeja: json['noMeja'] as String? ?? '',
+        totalHarga: json['totalHarga'] as int? ?? 0,
         items: items);
   }
 }

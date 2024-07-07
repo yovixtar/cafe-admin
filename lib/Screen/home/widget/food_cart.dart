@@ -56,7 +56,7 @@ class _FoodCardState extends State<FoodCard> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: Image.network(
-                  '${Config.baseUrl}/${widget.gambar}',
+                  '${Config.baseUrl}${widget.gambar}',
                   height: 120,
                   width: 120,
                   fit: BoxFit.cover,

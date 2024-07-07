@@ -1,5 +1,6 @@
 import 'package:admin/Screen/home/home_screen.dart';
 import 'package:admin/Screen/menu/list_menu.dart';
+import 'package:admin/Screen/order/order_page.dart';
 import 'package:admin/Screen/profile/profile.dart';
 import 'package:admin/color.dart';
 import 'package:admin/Screen/kategori/list_kategori.dart';
@@ -20,7 +21,7 @@ class _BottomBarState extends State<BottomBar> {
     HomePage(),
     ListMenu(),
     ListKategori(),
-    Scaffold(),
+    OrderPage(),
     ProfilePage(),
   ];
 

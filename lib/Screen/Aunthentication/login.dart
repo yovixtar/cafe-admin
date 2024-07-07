@@ -202,26 +202,28 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               // Validasi sukses, lanjut ke halaman berikutnya
-                              handleLogin();
+                              (isLoading) ? null : handleLogin();
                             }
                           },
-                          child: Text(
-                            "Masuk",
-                            style: GoogleFonts.lato(
-                              textStyle: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w800,
-                                color: Colors.white,
-                                shadows: [
-                                  Shadow(
-                                    offset: Offset(1.0, 1.0),
-                                    blurRadius: 2.0,
-                                    color: Color.fromARGB(64, 0, 0, 0),
+                          child: (isLoading)
+                              ? CircularProgressIndicator()
+                              : Text(
+                                  "Masuk",
+                                  style: GoogleFonts.lato(
+                                    textStyle: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w800,
+                                      color: Colors.white,
+                                      shadows: [
+                                        Shadow(
+                                          offset: Offset(1.0, 1.0),
+                                          blurRadius: 2.0,
+                                          color: Color.fromARGB(64, 0, 0, 0),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
+                                ),
                         )
                       ],
                     ),

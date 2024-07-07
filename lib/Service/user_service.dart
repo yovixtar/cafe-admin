@@ -54,4 +54,17 @@ class UserService {
       return {'error': "Terjadi kendala, mohon tunggu sebentar lagi !"};
     }
   }
+
+  Future<Map<String, dynamic>> getUser() async {
+    var token = await SessionManager.getReqToken();
+    var url = Uri.parse("$baseUrl/api/user");
+    var headers = {"Content-Type": "application/json", 'Authorization': token!};
+
+    var response = await http.get(url, headers: headers);
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else {
+      return {'error': "Terjadi kendala, mohon tunggu sebentar lagi !"};
+    }
+  }
 }
